@@ -15,7 +15,7 @@ class TpbNamedEntity(BaseModel):
     birthDate: str | None = None
 
 
-class TpbRelatedPersons(TpbNamedEntity):
+class TpbRelatedPerson(TpbNamedEntity):
     nationality: str
 
 
@@ -37,5 +37,5 @@ class TpbCompany(BaseModel):
     dateTo: str | None = None
     address: str | None = None
     activities: list[TbpActivity] | None = []
-    relatedPersons: list[TpbNamedEntity]
+    relatedPersons: list[TpbRelatedPerson]
     relatedCompanies: list[TpbRelatedCompany]
