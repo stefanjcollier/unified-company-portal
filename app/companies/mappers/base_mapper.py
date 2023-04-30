@@ -2,6 +2,7 @@ from pydantic import ValidationError
 
 from app.companies.errors import CannotUnifyDataException
 
+
 class BaseMapper:
     MODEL = None
 
@@ -21,4 +22,3 @@ class BaseMapper:
             return self.MODEL.parse_obj(data)
         except ValidationError as e:
             raise CannotUnifyDataException(data, e)
-

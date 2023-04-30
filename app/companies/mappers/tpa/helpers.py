@@ -15,5 +15,3 @@ def map_TpaAddress_to_str(address: TpaAddress):
     lines = [address.street, address.city, address.country, address.postcode]
     non_empty_lines = [line for line in lines if line]
     return ', '.join(non_empty_lines)
-
-

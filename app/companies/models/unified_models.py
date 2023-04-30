@@ -18,7 +18,7 @@ class UnifiedRelatedPerson(UnifiedNameEntity):
 
 
 class UnifiedRelatedCompany(UnifiedNameEntity):
-    county_jurisdiction_code: str | None = None
+    country_jurisdiction_code: str | None = None
 
 
 class UnifiedCompany(BaseModel):
