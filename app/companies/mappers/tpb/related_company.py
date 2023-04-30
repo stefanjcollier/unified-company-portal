@@ -13,9 +13,6 @@ class MapTpbToUnifiedRelatedCompany(BaseMapper):
         self.company = company
 
     def _map_data(self):
-        print(NATION_TO_CODE)
-        print(self.company.country)
-        print(NATION_TO_CODE.get(self.company.country))
         return {
             "name": self.company.name,
             "date_from": map_str_date_to_date(self.company.dateFrom),
