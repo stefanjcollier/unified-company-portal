@@ -1,24 +1,10 @@
-from datetime import date
 from pydantic import ValidationError
 
-from app.companies.errors import CannotUnifyDataException
-from app.companies.mappers.extract_active import extract_active
-from app.companies.models.tpa_models import TpaCompany, TpaAddress
-from app.companies.models.dates import Date
 from app.companies.models.unified_models import UnifiedCompany
+from app.companies.models.tpa_models import TpaCompany
+from app.companies.errors import CannotUnifyDataException
 
-
-def map_Date_to_date(model: Date):
-    if model is None:
-        return None
-
-    return date(model.year, model.month, model.day)
-
-
-def map_TpaAddress_to_str(address: TpaAddress):
-    lines = [address.street, address.city, address.country, address.postcode]
-    non_empty_lines = [line for line in lines if line]
-    return ', '.join(non_empty_lines)
+from .helpers import map_Date_to_date, map_TpaAddress_to_str
 
 
 class MapTpaToUnifiedCompany:
@@ -45,7 +31,6 @@ class MapTpaToUnifiedCompany:
         }
 
     def _enrich_data(self, data):
-        data['active'] = self.company.status == 'Active' or extract_active(data["date_established"], data["date_dissolved"])
         return data
 
     @staticmethod

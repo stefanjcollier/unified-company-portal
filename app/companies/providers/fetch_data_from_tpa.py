@@ -3,7 +3,7 @@ import requests
 
 from app.companies.errors import NotFoundException, InvalidProviderDataException
 from app.companies.models.tpa_models import TpaCompany
-from app.companies.mappers.tpa_to_unified import MapTpaToUnifiedCompany
+from app.companies.mappers.tpa.company import MapTpaToUnifiedCompany
 
 
 class FetchDataFromTpa:

@@ -1,4 +1,3 @@
-
 class ExtractTypeFromName:
 
     KNOWN_COMPANY_TYPES = {

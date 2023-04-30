@@ -1,4 +1,3 @@
-from datetime import datetime, date
 from pydantic import ValidationError
 
 from app.companies.errors import CannotUnifyDataException
@@ -7,12 +6,7 @@ from app.companies.models.unified_models import UnifiedCompany
 from app.companies.mappers.extract_type_from_name import ExtractTypeFromName
 from app.companies.mappers.extract_active import extract_active
 
-
-def map_str_date_to_date(str_date: str):
-    if str_date is None:
-        return None
-
-    return datetime.strptime(str_date, '%d/%m/%Y').date()
+from .helpers import map_str_date_to_date
 
 
 class MapTpbToUnifiedCompany:

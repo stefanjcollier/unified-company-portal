@@ -3,12 +3,12 @@ import requests
 
 from app.companies.errors import NotFoundException, InvalidProviderDataException
 from app.companies.models.tpb_models import TpbCompany
-from app.companies.mappers.tpb_to_unified import MapTpbToUnifiedCompany
+from app.companies.mappers.tpb.company import MapTpbToUnifiedCompany
 
 
 class FetchDataFromTpb:
     """
-    Fetch company data from 'Third Party A'
+    Fetch company data from 'Third Party B'
     """
     def __init__(self, jurisdiction_code: str, company_number: str):
         self.jurisdiction_code = jurisdiction_code

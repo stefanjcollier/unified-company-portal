@@ -14,7 +14,10 @@ def root():
 @app.get("/v1/company/{jurisdiction_code}/{company_number}")
 def fetch_company(jurisdiction_code: str, company_number: str):
     try:
-        return FetchData(jurisdiction_code, company_number).call()
+        return FetchData(
+            jurisdiction_code.lower(),
+            company_number
+        ).call()
 
     except NotFoundException:
         raise HTTPException(status_code=404)
