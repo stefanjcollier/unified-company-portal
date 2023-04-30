@@ -21,7 +21,6 @@ class FetchDataFromTpb:
 
     def _fetch_data(self):
         url = f"https://interview-df854r23.sikoia.com/v1/company-data?jurisdictionCode={self.jurisdiction_code}&companyNumber={self.company_number}"
-        print(url)
         response = requests.get(url, headers={'Accept': 'application/json'})
         if response.status_code != 200:
             raise NotFoundException()

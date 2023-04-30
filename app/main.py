@@ -24,8 +24,6 @@ def fetch_company(jurisdiction_code: str, company_number: str):
     except UnsupportedJurisdictionException:
         raise HTTPException(status_code=400, detail=f"Unsupported Jurisdiction: {jurisdiction_code}")
     except CompanyException as e:
-        print(e.data)
-        print(e.errors)
         # Idea: Report error to Rollbar/Similar
         raise HTTPException(status_code=500)
 
