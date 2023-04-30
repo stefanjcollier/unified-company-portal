@@ -13,13 +13,6 @@ def extract_name(entity: TpaNamedEntity):
     return ' '.join(present_name_parts)
 
 
-def none_safe_floatify(string):
-    if string is None:
-        return None
-
-    return float(string)
-
-
 def map_Date_to_date(model: Date):
     if model is None:
         return None

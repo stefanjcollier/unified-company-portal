@@ -1,16 +1,9 @@
 from app.companies.mappers.base_mapper import BaseMapper
 from app.companies.models.tpa_models import TpaNamedEntity, TpaShareholder, TpaOfficer
 from app.companies.models.unified_models import UnifiedRelatedPerson, UnifiedRelatedCompany
+from app.companies.mappers.none_safe_floatify import none_safe_floatify
 
-from .helpers import none_safe_floatify, map_Date_to_date, extract_name
-
-
-def map_common_entity_data(entity: TpaNamedEntity):
-    return {
-        "name": extract_name(entity),
-        "date_from": map_Date_to_date(entity.date_from),
-        "date_to": map_Date_to_date(entity.date_to)
-    }
+from .helpers import map_Date_to_date, extract_name
 
 
 def extra_data(entity: TpaNamedEntity):
@@ -41,7 +34,11 @@ class BaseTpaNamedEntityMapper(BaseMapper):
         self.entity = entity
 
     def _map_data(self):
-        data = map_common_entity_data(self.entity)
+        data = {
+            "name": extract_name(self.entity),
+            "date_from": map_Date_to_date(self.entity.date_from),
+            "date_to": map_Date_to_date(self.entity.date_to)
+        }
         data |= extra_data(self.entity)
         return data
 

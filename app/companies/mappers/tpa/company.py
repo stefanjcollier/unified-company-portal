@@ -1,5 +1,5 @@
 from app.companies.mappers.base_mapper import BaseMapper
-from app.companies.mappers.tpa.related_person import MapTpaNamedEntityToPerson, MapTpaNamedEntityToCompany
+from app.companies.mappers.tpa.named_entity import MapTpaNamedEntityToPerson, MapTpaNamedEntityToCompany
 from app.companies.models.tpa_models import TpaCompany, TpaNamedEntity
 from app.companies.models.unified_models import UnifiedCompany
 
