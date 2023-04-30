@@ -1,22 +1,30 @@
-from pydantic import ValidationError
-
-from app.companies.models.unified_models import UnifiedCompany
+from app.companies.mappers.base_mapper import BaseMapper
 from app.companies.models.tpa_models import TpaCompany
-from app.companies.errors import CannotUnifyDataException
+from app.companies.models.unified_models import UnifiedCompany
 
 from .helpers import map_Date_to_date, map_TpaAddress_to_str
 
 
-class MapTpaToUnifiedCompany:
+def _partition_people_and_companies(company):
+    named_entities = company.officers + company.owners
+    people = companies = []
+    for entity in named_entities:
+        if entity.date_of_birth is not None:
+            people.append(entity)
+        else:
+            companies.append(entity)
+    return people, companies
+
+
+class MapTpaToUnifiedCompany(BaseMapper):
+
+    MODEL = UnifiedCompany
+
     def __init__(self, tpa_company: TpaCompany):
         self.company = tpa_company
 
-    def call(self):
-        data = self._map_data()
-        data = self._enrich_data(data)
-        return self._to_model(data)
-
     def _map_data(self):
+        people, companies = _partition_people_and_companies(self.company)
         return {
             "number": self.company.company_number,
             "name": self.company.company_name,
@@ -26,16 +34,6 @@ class MapTpaToUnifiedCompany:
             "date_established": map_Date_to_date(self.company.date_established),
             "date_dissolved": map_Date_to_date(self.company.date_dissolved),
             "address": map_TpaAddress_to_str(self.company.official_address),
-            "officers": None,
-            "owners": None,
+            "related_people": None,
+            "related_companies": None,
         }
-
-    def _enrich_data(self, data):
-        return data
-
-    @staticmethod
-    def _to_model(data: dict):
-        try:
-            return UnifiedCompany(**data)
-        except ValidationError as e:
-            raise CannotUnifyDataException(data, e)

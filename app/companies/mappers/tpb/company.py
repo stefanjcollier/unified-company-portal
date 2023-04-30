@@ -7,16 +7,15 @@ from app.companies.mappers.extract_type_from_name import ExtractTypeFromName
 from app.companies.mappers.extract_active import extract_active
 
 from .helpers import map_str_date_to_date
+from ..base_mapper import BaseMapper
 
 
-class MapTpbToUnifiedCompany:
+class MapTpbToUnifiedCompany(BaseMapper):
+
+    MODEL = UnifiedCompany
+
     def __init__(self, tpb_company: TpbCompany):
         self.company = tpb_company
-
-    def call(self):
-        data = self._map_data()
-        data = self._enrich_data(data)
-        return self._to_model(data)
 
     def _map_data(self):
         return {
@@ -28,18 +27,11 @@ class MapTpbToUnifiedCompany:
             "date_established": map_str_date_to_date(self.company.dateFrom),
             "date_dissolved": map_str_date_to_date(self.company.dateTo),
             "address": self.company.address,
-            "officers": None,
-            "owners": None,
+            "related_people": None,
+            "related_companies": None,
         }
 
     def _enrich_data(self, data):
         data["type"] = ExtractTypeFromName.call(self.company.companyName)
         data["active"] = extract_active(data["date_established"], data["date_dissolved"])
         return data
-
-    @staticmethod
-    def _to_model(data: dict):
-        try:
-            return UnifiedCompany(**data)
-        except ValidationError as e:
-            raise CannotUnifyDataException(data, e)
