@@ -1,9 +1,9 @@
 from app.companies.mappers.base_mapper import BaseMapper
+from app.companies.mappers.tpa.helpers import map_Date_to_date, map_TpaAddress_to_str
 from app.companies.mappers.tpa.named_entity import MapTpaNamedEntityToPerson, MapTpaNamedEntityToCompany
 from app.companies.models.tpa_models import TpaCompany, TpaNamedEntity
 from app.companies.models.unified_models import UnifiedCompany
 
-from .helpers import map_Date_to_date, map_TpaAddress_to_str
 
 
 def _partition_people_and_companies(company):

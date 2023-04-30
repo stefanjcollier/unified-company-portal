@@ -19,14 +19,9 @@ class TpbRelatedPerson(TpbNamedEntity):
     nationality: str
 
 
-class TpbRelatedCompany(BaseModel):
-    name: str
-    dateFrom: str
-    dateTo: str | None = None
+class TpbRelatedCompany(TpbNamedEntity):
     address: str | None = None
-    type: str | None = None
     country: str | None = None
-    ownership: str | None = None
 
 
 class TpbCompany(BaseModel):
