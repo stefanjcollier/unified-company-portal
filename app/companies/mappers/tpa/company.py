@@ -1,5 +1,5 @@
 from app.companies.mappers.base_mapper import BaseMapper
-from app.companies.mappers.tpa.named_entities import MapTpaNamedEntityToPerson
+from app.companies.mappers.tpa.related_person import MapTpaNamedEntityToPerson, MapTpaNamedEntityToCompany
 from app.companies.models.tpa_models import TpaCompany, TpaNamedEntity
 from app.companies.models.unified_models import UnifiedCompany
 
@@ -27,7 +27,7 @@ def _map_people(entities: list[TpaNamedEntity]):
 
 
 def _map_companies(entities: list[TpaNamedEntity]):
-    return [MapTpaNamedEntityToPerson(entity).call() for entity in entities]
+    return [MapTpaNamedEntityToCompany(entity).call() for entity in entities]
 
 
 class MapTpaToUnifiedCompany(BaseMapper):
