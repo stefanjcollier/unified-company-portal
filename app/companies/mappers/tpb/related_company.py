@@ -26,4 +26,3 @@ class MapTpbToUnifiedRelatedCompany(BaseMapper):
     def _enrich_data(self, data: dict):
         data["type"] = ExtractTypeFromName.call(data['name'])
         return data
-    

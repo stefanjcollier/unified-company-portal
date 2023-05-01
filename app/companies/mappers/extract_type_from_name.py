@@ -12,4 +12,4 @@ class ExtractTypeFromName:
     @classmethod
     def call(cls, name):
         last_term = name.split(' ')[-1].lower()
-        return cls.KNOWN_COMPANY_TYPES[last_term]
+        return cls.KNOWN_COMPANY_TYPES.get(last_term)
