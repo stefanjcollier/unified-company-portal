@@ -1,5 +1,6 @@
 from app.companies.mappers.base_mapper import BaseMapper
 from app.companies.mappers.extract_jurisdiction import NATION_TO_CODE
+from app.companies.mappers.extract_type_from_name import ExtractTypeFromName
 from app.companies.mappers.none_safe_floatify import none_safe_floatify
 from app.companies.mappers.tpb.helpers import map_str_date_to_date
 from app.companies.models.tpb_models import TpbRelatedCompany
@@ -21,3 +22,8 @@ class MapTpbToUnifiedRelatedCompany(BaseMapper):
             "ownership_percentage": none_safe_floatify(self.company.ownership),
             "country_jurisdiction_code": NATION_TO_CODE.get(self.company.country)
         }
+
+    def _enrich_data(self, data: dict):
+        data["type"] = ExtractTypeFromName.call(data['name'])
+        return data
+    

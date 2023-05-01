@@ -3,6 +3,8 @@ class ExtractTypeFromName:
     KNOWN_COMPANY_TYPES = {
         'ltd': 'Ltd',
         'plc': 'PLC',
+        'inc.': 'Inc.',
+        'inc': 'Inc.',
         'gmbh': 'GmbH',
         'n.v.': 'N.V.'
     }

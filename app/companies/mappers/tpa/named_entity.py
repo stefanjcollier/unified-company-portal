@@ -4,6 +4,7 @@ from app.companies.models.unified_models import UnifiedRelatedPerson, UnifiedRel
 from app.companies.mappers.none_safe_floatify import none_safe_floatify
 
 from .helpers import map_Date_to_date, extract_name
+from ..extract_type_from_name import ExtractTypeFromName
 
 
 def extra_data(entity: TpaNamedEntity):
@@ -54,3 +55,7 @@ class MapTpaNamedEntityToPerson(BaseTpaNamedEntityMapper):
 
 class MapTpaNamedEntityToCompany(BaseTpaNamedEntityMapper):
     MODEL = UnifiedRelatedCompany
+
+    def _enrich_data(self, data: dict):
+        data["type"] = ExtractTypeFromName.call(data['name'])
+        return data
