@@ -1,8 +1,7 @@
 # Unified Data Portal
 A microservice to provide consolidated company's house data from multiple sources
 
-
-## Features
+## Features
 - simplifies name
 - dedupes people and companies from multiple sources
 - derives
