@@ -12,7 +12,7 @@ def extra_data(entity: TpaNamedEntity):
     elif isinstance(entity, TpaShareholder):
         return shareholder_data(entity)
     else:
-        raise NotImplemented()
+        raise NotImplementedError()
 
 
 def officer_data(entity: TpaOfficer):

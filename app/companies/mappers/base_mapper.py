@@ -12,7 +12,7 @@ class BaseMapper:
         return self._to_model(data)
 
     def _map_data(self):
-        raise NotImplemented
+        raise NotImplementedError()
 
     def _enrich_data(self, data: dict):
         return data
