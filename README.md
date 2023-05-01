@@ -2,6 +2,14 @@
 A microservice to provide consolidated company's house data from multiple sources
 
 
+## Features
+- simplifies name
+- dedupes people and companies from multiple sources
+- derives
+   - active status
+   - company types
+- shows all nationalities in jurisdiction codes
+
 ## Endpoints
 Host: http://127.0.0.1:8000
 - / 
