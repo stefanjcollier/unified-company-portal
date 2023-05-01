@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, HTTPException
 
 from app.companies.errors import *
@@ -28,3 +29,5 @@ def fetch_company(jurisdiction_code: str, company_number: str):
         raise HTTPException(status_code=500)
 
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
