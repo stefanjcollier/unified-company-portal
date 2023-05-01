@@ -7,7 +7,7 @@ from app.companies.models.unified_models import UnifiedCompany
 
 
 def _partition_people_and_companies(company):
-    named_entities = company.officers + company.owners
+    named_entities = (company.officers or []) + (company.owners or [])
     people = []
     companies = []
     for entity in named_entities:

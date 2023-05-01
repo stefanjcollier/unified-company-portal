@@ -30,5 +30,5 @@ class UnifiedCompany(BaseModel):
     date_established: date | None = None
     date_dissolved: date | None = None
     address: str
-    related_people: list[UnifiedRelatedPerson] | None = []
-    related_companies: list[UnifiedRelatedCompany] | None = []
+    related_people: list[UnifiedRelatedPerson] = []
+    related_companies: list[UnifiedRelatedCompany] = []
