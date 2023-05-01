@@ -3,6 +3,7 @@
 _NATIONS = [
     ['Braavos', 'Braavosi', 'got-br'],
     ['Westeros', 'Westerosi', 'got-we'],
+    ['Pentos', 'Pentoshi', 'got-pe'],
     ['United States', 'American', 'us'],
     ['Italy', 'Italian', 'it'],
     ['Canada', 'Canadian', 'ca'],
